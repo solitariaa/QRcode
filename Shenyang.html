@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title></title>
+  <link href="good.css" rel="stylesheet" type="text/css"/>
+ </head>
+ <style type="text/css">
+  div{
+   width: 200px;
+   height: 200px;
+    
+  }
+  .tu{
+   background-image:url(2.jpg);
+   }
+  #z-1{
+   background-position: 0px 0px;
+  }
+  #z-2{
+   background-position:-200px 0px;
+  }
+  #z-3{
+   background-position:-400px 0px;
+  }
+  #z-4{
+   background-position:0 -200px;
+  }
+  #z-5{
+   background-position: -200px -200px;
+  }
+  #z-6{
+   background-position: -400px -200px;
+  }
+  #z-7{
+   background-position: 0px -400px;
+  }
+  #z-8{
+   background-position: -200px -400px;
+  }
+  #z-9{
+   background-position: -400px -400px;
+  }
+ </style>
+ <script>
+  function over(e){
+   e.preventDefault();
+  }
+  function drag(e){
+   var id=e.target.id;
+   // console.log(e.target.id);
+   e.dataTransfer.setData("id",id);
+  }
+  function drop(e){
+   var beizhuaId=e.dataTransfer.getData("id");
+   // console.log(beizhuaId);
+   var fangID=e.target.id;
+   var beizhua=document.getElementById(beizhuaId);
+   var fang=document.getElementById(fangID);
+   var f_beizhua=beizhua.parentNode;
+   var f_fang=fang.parentNode;
+   f_beizhua.appendChild(fang);
+   f_fang.appendChild(beizhua);
+   win();
+   }
+   function win(){
+    var tus=document.getElementsByClassName('tu');
+    var count=0;
+    for(var i=0;i<tus.length;i++){
+     var tu=tus[i];
+     var fu=tu.parentNode;
+     var tu_id=tu.getAttribute("id");
+     var fu_id=fu.getAttribute("id");
+     if(tu_id.replace("z-","")==fu_id.replace("f-","")){
+      count++;
+      console.log(count);
+     }else{
+      return;
+     }
+    }
+     
+    if(count==9){
+     alert("you win!");
+    }
+     
+   }
+ </script>
+ <body>
+  <table border="1">
+   <tr>
+    <td>
+     <div id="f-1" ondragover="over(event)" ondrop="drop(event)">
+      <div id="z-3" class="tu" draggable="true" ondragstart="drag(event)"></div>
+     </div>
+    </td>
+    <td>
+     <div id="f-2" ondragover="over(event)" ondrop="drop(event)">
+      <div  id="z-4" class="tu" draggable="true" ondragstart="drag(event)"></div>
+     </div>
+    </td>
+    <td>
+     <div id="f-3" ondragover="over(event)" ondrop="drop(event)">
+      <div  id="z-8" class="tu" draggable="true" ondragstart="drag(event)"></div>
+     </div>
+    </td>
+   </tr>
+   <tr>
+    <td>
+     <div id="f-4" ondragover="over(event)" ondrop="drop(event)">
+      <div id="z-6" class="tu" draggable="true" ondragstart="drag(event)"></div>
+     </div>
+    </td>
+    <td>
+     <div id="f-5" ondragover="over(event)" ondrop="drop(event)">
+      <div id="z-7" class="tu" draggable="true" ondragstart="drag(event)"></div>
+     </div>
+    </td>
+    <td>
+     <div id="f-6" ondragover="over(event)" ondrop="drop(event)">
+      <div id="z-2"  class="tu" draggable="true" ondragstart="drag(event)"></div>
+     </div>
+    </td>
+   </tr>
+   <tr>
+    <td>
+     <div id="f-7" ondragover="over(event)" ondrop="drop(event)">
+      <div id="z-9"  class="tu" draggable="true" ondragstart="drag(event)"></div>
+     </div>
+    </td>
+    <td>
+     <div id="f-8" ondragover="over(event)" ondrop="drop(event)">
+      <div id="z-5" class="tu" draggable="true" ondragstart="drag(event)"></div>
+     </div>
+    </td>
+    <td>
+     <div id="f-9" ondragover="over(event)" ondrop="drop(event)">
+      <div id="z-1" class="tu" draggable="true" ondragstart="drag(event)"></div>
+     </div>
+    </td>
+   </tr>
+ 
+  </table>
+ </body>
+</html>
